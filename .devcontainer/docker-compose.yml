@@ -14,6 +14,7 @@ services:
     image: neo4j:5-community
     environment:
       NEO4J_AUTH: neo4j/workshop-password
+      NEO4J_server_bolt_advertised__address: ":443"
       NEO4J_PLUGINS: '["apoc"]'   # downloaded on first start; query_graph reads the schema with apoc.meta.schema()
       NEO4J_dbms_security_procedures_allowlist: "apoc.meta.*,apoc.version"
     ports:

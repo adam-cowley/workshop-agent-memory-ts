@@ -4,11 +4,14 @@
   "service": "workspace",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "shutdownAction": "stopCompose",
-  "forwardPorts": [7474, 7687, 4111],
+  "forwardPorts": [7474, 4111],
   "portsAttributes": {
     "7474": { "label": "Neo4j Browser", "onAutoForward": "notify" },
-    "7687": { "label": "Neo4j Bolt", "onAutoForward": "silent" },
     "4111": { "label": "Mastra Studio (npm run dev)", "onAutoForward": "notify" }
+  },
+  "otherPortsAttributes": { "onAutoForward": "silent" },
+  "containerEnv": {
+    "NEO4J_URI": "bolt://localhost:7687"
   },
   "containerEnv": {
     "MASTRA_HOST": "0.0.0.0",
@@ -22,6 +25,11 @@
     "OPENAI_API_KEY": "${localEnv:OPENAI_API_KEY}",
     "OPENAI_BASE_URL": "${localEnv:OPENAI_BASE_URL}",
     "MODEL": "${localEnv:MODEL}"
+  },
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md", "NEO4J_BROWSER_LINK.txt"]
+    }
   },
   "postCreateCommand": "bash .devcontainer/post-create.sh",
   "customizations": {
